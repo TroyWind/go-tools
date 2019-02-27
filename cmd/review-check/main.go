@@ -13,7 +13,7 @@ func main() {
 	fs.Parse(os.Args[1:])
 
 	checkers := []lint.Checker{
-		review_check.NewChecker(fs.Args()),
+		review_check.NewChecker(),
 	}
 
 	lintutil.ProcessFlagSet(checkers, fs)
