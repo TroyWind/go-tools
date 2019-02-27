@@ -82,7 +82,7 @@ func checkPkgDirAndFileName(origin string) (invalidPkgs []string, invalidFiles [
 func validPkgName(n string) bool {
 	// 检查是否有非合格字符（小写+-为合格，其它有再加）
 	for _, c := range n {
-		if (c < 'a' || c > 'z') && c != '-' {
+		if (c < 'a' || c > 'z') && c != '-' && (c < '0' || c > '9') {
 			return false
 		}
 	}
@@ -90,8 +90,11 @@ func validPkgName(n string) bool {
 }
 
 func validFileName(n string) bool {
+	if filepath.Ext(n) != ".go" {
+		return true
+	}
 	for _, c := range n {
-		if (c < 'a' || c > 'z') && c != '_' && c != '.' {
+		if (c < 'a' || c > 'z') && c != '_' && c != '.' && (c < '0' || c > '9') {
 			return false
 		}
 	}
